@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>TEAM IMPACT @ MULEARN</title>
+
+	<link rel="stylesheet" href="css/main.css">
+
+	<script src="libs/gsap/gsap.min.js" defer></script>
+	<script src="libs/gsap/ScrollTrigger.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="libs/gsap/ScrollSmoother.min.js" defer></script>
+
+	<script src="js/app.js" defer></script>
+
+</head>
+
+
+<body>
+	<div id="myModal" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p>This website contain auto play audio </p>
+		</div>
+
+	</div>
+
+
+	<div class="wrapper">
+		<div class="content">
+
+			<header class="main-header">
+				<div class="layers">
+					<div class="layer__header">
+						<div class="layers__caption">njan</div>
+						<div class="layers__title">മഹാബലി</div>
+					</div>
+					<div class="layer layers__base" style="background-image: url(img/layer-base.png);"></div>
+					<div class="layer layers__middle" style="background-image: url(img/layer-middle.png);"></div>
+					<div class="layer layers__front" style="background-image: url(img/layer-front.png);"></div>
+				</div>
+			</header>
+
+
+
+
+
+			<div class="space">
+
+			</div>
+			<article class="main-article">
+				<img class="maveli" src="img/mm.png" sizes="200">
+				<div class="main-article__content">
+
+					<h2 class="main-article__header">എന്നെക്കുറിച്ച് </h2>
+					<p class="main-article__paragraph">" ഹിന്ദുപുരാണത്തിലെ ശക്തനായ ഒരു അസുര രാജാവാണ് ഞൻ. മാവേലി എന്നും
+						കേരളീയർ വിളിക്കുന്നു. കേരളീയരുടെ സംസ്ഥാനോത്സവമായ ഓണം കൊണ്ടാടുന്നത് എൻറെ ഓർമ്മക്കാണ്‌ എന്ന്
+						വിശ്വസിക്കുന്നു. മഹാഭാരതത്തിലും പുരാണങ്ങളിലും പരാമർശിതനായ ദൈത്യരാജാവാണ് യഥാർത്ഥത്തിൽ ഞാൻ എന്നും
+						വിശ്വസിക്കുന്നവരും ഉണ്ട്. കേരളത്തിലെ ചേരരാജാക്കന്മാരുടെ കീഴിൽ കൊങ്ങുനാട്ടിലെ അമരാവതി തീരത്തെ
+						കരവൂരിൽ വാണിരുന്നവരത്രേ കൊങ്കിളം കോവരചർ. ഇവരാണ് എൻറെ വംശജർ എന്ന് ചില ചരിത്രകാരന്മാർ
+						വാദിക്കുന്നുണ്ട്. ഈ വംശത്തിൽ പെട്ടതും തൃക്കാക്കര ആസ്ഥാനമാക്കിയിരുന്നതുമായ മഹാനായ ഒരു ചേരരാജാവാണ്
+						ഞാൻ എന്ന് ഐതിഹ്യം സൂചിപ്പിക്കുന്നു "
+						.</p>
+				</div>
+
+				<div class="copy">Team IMpact</div>
+			</article>
+
+
+			<script>
+
+				(function ($) {
+					$(function () {
+
+
+						$(window).on('scroll', function () {
+							fnOnScroll();
+						});
+
+						$(window).on('resize', function () {
+							fnOnResize();
+						});
+
+
+						var agTimeline = $('.js-timeline'),
+							agTimelineLine = $('.js-timeline_line'),
+							agTimelineLineProgress = $('.js-timeline_line-progress'),
+							agTimelinePoint = $('.js-timeline-card_point-box'),
+							agTimelineItem = $('.js-timeline_item'),
+							agOuterHeight = $(window).outerHeight(),
+							agHeight = $(window).height(),
+							f = -1,
+							agFlag = false;
+
+						function fnOnScroll() {
+							agPosY = $(window).scrollTop();
+
+							fnUpdateFrame();
+						}
+
+						function fnOnResize() {
+							agPosY = $(window).scrollTop();
+							agHeight = $(window).height();
+
+							fnUpdateFrame();
+						}
+
+						function fnUpdateWindow() {
+							agFlag = false;
+
+							agTimelineLine.css({
+								top: agTimelineItem.first().find(agTimelinePoint).offset().top - agTimelineItem.first().offset().top,
+								bottom: agTimeline.offset().top + agTimeline.outerHeight() - agTimelineItem.last().find(agTimelinePoint).offset().top
+							});
+
+							f !== agPosY && (f = agPosY, agHeight, fnUpdateProgress());
+						}
+
+						function fnUpdateProgress() {
+							var agTop = agTimelineItem.last().find(agTimelinePoint).offset().top;
+
+							i = agTop + agPosY - $(window).scrollTop();
+							a = agTimelineLineProgress.offset().top + agPosY - $(window).scrollTop();
+							n = agPosY - a + agOuterHeight / 2;
+							i <= agPosY + agOuterHeight / 2 && (n = i - a);
+							agTimelineLineProgress.css({ height: n + "px" });
+
+							agTimelineItem.each(function () {
+								var agTop = $(this).find(agTimelinePoint).offset().top;
+
+								(agTop + agPosY - $(window).scrollTop()) < agPosY + .5 * agOuterHeight ? $(this).addClass('js-ag-active') : $(this).removeClass('js-ag-active');
+							})
+						}
+
+						function fnUpdateFrame() {
+							agFlag || requestAnimationFrame(fnUpdateWindow);
+							agFlag = true;
+						}
+
+
+					});
+				})(jQuery);
+
+			</script>
+			<section class="time">
+
+				<div class="ag-timeline-block">
+					<div class="ag-timeline_title-box">
+						<div class="ag-timeline_tagline">മഹാബലി</div>
+
+
+						<div class="ag-timeline_title">എൻ്റെ ജീവിതകാലം</div>
+					</div>
+					<section class="ag-section">
+						<div class="ag-format-container">
+							<div class="js-timeline ag-timeline">
+								<div class="js-timeline_line ag-timeline_line">
+									<div class="js-timeline_line-progress ag-timeline_line-progress"></div>
+								</div>
+								<div class="ag-timeline_list">
+									<div class="js-timeline_item ag-timeline_item">
+										<div class="ag-timeline-card_box">
+											<div class="js-timeline-card_point-box ag-timeline-card_point-box">
+												<div class="ag-timeline-card_point"></div>
+											</div>
+											<div class="ag-timeline-card_meta-box">
+												<div class="ag-timeline-card_meta">1</div>
+											</div>
+										</div>
+										<div class="ag-timeline-card_item">
+											<div class="ag-timeline-card_inner">
+												<div class="ag-timeline-card_img-box">
+													<img src="img/1.1.webp" class="ag-timeline-card_img" width="640"
+														height="360" />
+												</div>
+												<div class="ag-timeline-card_info">
+													<div class="ag-timeline-card_title">Seafghgfhfghson 13</div>
+													<div class="ag-timeline-card_desc">
+														ഹിന്ദുപുരാണത്തിലെ ശക്തനായ ഒരു അസുര രാജാവാണ് മഹാബലി. മാവേലി
+														എന്നും കേരളീയർ വിളിക്കുന്നു.
+													</div>
+												</div>
+											</div>
+											<div class="ag-timeline-card_arrow"></div>
+										</div>
+									</div>
+
+									<div class="js-timeline_item ag-timeline_item">
+										<div class="ag-timeline-card_box">
+											<div class="ag-timeline-card_meta-box">
+												<div class="ag-timeline-card_meta">2</div>
+											</div>
+											<div class="js-timeline-card_point-box ag-timeline-card_point-box">
+												<div class="ag-timeline-card_point"></div>
+											</div>
+										</div>
+										<div class="ag-timeline-card_item">
+											<div class="ag-timeline-card_inner">
+												<div class="ag-timeline-card_img-box">
+													<img src="img/1.jpg" class="ag-timeline-card_img" width="640"
+														height="360" alt="" />
+												</div>
+												<div class="ag-timeline-card_info">
+													<div class="ag-timeline-card_title">2</div>
+													<div class="ag-timeline-card_desc">
+														കേരളീയരുടെ സംസ്ഥാനോത്സവമായ ഓണം കൊണ്ടാടുന്നത് അദ്ദേഹത്തിന്റെ
+														ഓർമ്മക്കാണ്‌ എന്ന് വിശ്വസിക്കുന്നു.
+													</div>
+												</div>
+											</div>
+											<div class="ag-timeline-card_arrow"></div>
+										</div>
+									</div>
+
+									<div class="js-timeline_item ag-timeline_item">
+										<div class="ag-timeline-card_box">
+											<div class="js-timeline-card_point-box ag-timeline-card_point-box">
+												<div class="ag-timeline-card_point"></div>
+											</div>
+											<div class="ag-timeline-card_meta-box">
+												<div class="ag-timeline-card_meta">3</div>
+											</div>
+										</div>
+										<div class="ag-timeline-card_item">
+											<div class="ag-timeline-card_inner">
+												<div class="ag-timeline-card_img-box">
+													<img src="img/3.jpg" class="ag-timeline-card_img" width="640"
+														height="360" alt="" />
+												</div>
+												<div class="ag-timeline-card_info">
+													<div class="ag-timeline-card_title">3</div>
+													<div class="ag-timeline-card_desc">
+														മഹാബലി 'വിശ്വജിത്ത്‌' എന്ന യാഗം ചെയ്യവേ വാമനനായി അവതാരമെടുത്ത
+														മഹാവിഷ്ണു ഭിക്ഷയായി മൂന്നടി മണ്ണ്‌ ആവശ്യപ്പെട്ടു. ചതി
+														മനസ്സിലാക്കിയ അസുരഗുരു ശുക്രാചാര്യരുടെ വിലക്കു വക വയ്ക്കാതെ
+														മഹാബലി വന്നിരിക്കുന്നത് ഭഗവാൻ ആണെന്ന് മനസിലാക്കി മൂന്നടി മണ്ണ്‌
+														അളന്നെടുക്കാൻ വാമനന്‌ അനുവാദം നൽകി. ആകാശംമുട്ടെ വളർന്ന വാമനൻ
+														തന്റെ കാൽപ്പാദം അളവുകോലാക്കി. ആദ്യത്തെ രണ്ടടിക്കു തന്നെ
+														സ്വർഗ്ഗവും ഭൂമിയും പാതാളവും അളന്നെടുത്തു. മൂന്നാമത്തെ അടിക്കായി
+														സ്ഥലമില്ലാതെ വന്നപ്പോൾ മഹാബലി ഭക്തിയോടെ തന്റെ ശിരസ്സ്‌
+														കാണിച്ചുകൊടുത്തു.
+													</div>
+												</div>
+											</div>
+											<div class="ag-timeline-card_arrow"></div>
+										</div>
+									</div>
+
+									<div class="js-timeline_item ag-timeline_item">
+										<div class="ag-timeline-card_box">
+											<div class="ag-timeline-card_meta-box">
+												<div class="ag-timeline-card_meta">4</div>
+											</div>
+											<div class="js-timeline-card_point-box ag-timeline-card_point-box">
+												<div class="ag-timeline-card_point"></div>
+											</div>
+										</div>
+										<div class="ag-timeline-card_item">
+											<div class="ag-timeline-card_inner">
+												<div class="ag-timeline-card_img-box">
+													<img src="img/4.webp" class="ag-timeline-card_img" width="640"
+														height="360" alt="" />
+												</div>
+												<div class="ag-timeline-card_info">
+													<div class="ag-timeline-card_title">4</div>
+													<div class="ag-timeline-card_desc">
+														ആത്മസമർപ്പണം ചെയ്ത മഹാബലിയെ സുതലലോകത്തിൻറെ ചക്രവർത്തിയാക്കി,
+														ഭഗവാൻ തന്നെ മഹാബലിയ്ക്ക് കാവൽക്കാരനായിരിയ്ക്കും എന്ന് വരം
+														കൊടുത്തു. അതുപ്രകാരം വാമനൻ ആയുധധാരിയായി മഹാബലിയുടെ കാവൽക്കാരനായി
+														സുതലലോകത്തിൽ നിലകൊണ്ടു. മഹാലക്ഷ്മിയും സുതലത്തിൽ സാന്നിധ്യം
+														ചെയ്തു
+													</div>
+												</div>
+											</div>
+											<div class="ag-timeline-card_arrow"></div>
+										</div>
+									</div>
+
+									<div class="js-timeline_item ag-timeline_item">
+										<div class="ag-timeline-card_box">
+											<div class="js-timeline-card_point-box ag-timeline-card_point-box">
+												<div class="ag-timeline-card_point"></div>
+											</div>
+											<div class="ag-timeline-card_meta-box">
+												<div class="ag-timeline-card_meta">5</div>
+											</div>
+										</div>
+										<div class="ag-timeline-card_item">
+											<div class="ag-timeline-card_inner">
+												<div class="ag-timeline-card_img-box">
+													<img src="img/5.webp" class="ag-timeline-card_img" width="640"
+														height="360" alt="" />
+												</div>
+												<div class="ag-timeline-card_info">
+													<div class="ag-timeline-card_title">5</div>
+													<div class="ag-timeline-card_desc">
+														മൂന്നടി മണ്ണ് ചോദിച്ച് ചതിച്ച് മാവേലിയെ പാതാളത്തിലേയ്ക്ക്
+														ചവിട്ടിത്താഴ്ത്തുകയും വർഷത്തിലൊരിക്കൽ തൻ്റെ പ്രജകളെ സന്ദർശിക്കാൻ
+														അനുവദിക്കുകയും ചെയ്തു
+													</div>
+												</div>
+											</div>
+											<div class="ag-timeline-card_arrow"></div>
+										</div>
+									</div>
+
+									
+
+								
+
+								
+
+								
+
+								
+
+								
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+
+			</section>
+
+
+
+
+
+
+
+
+
+
+
+			<section class="mydata">
+				<div class="external">
+					<div class="horizontal-scroll-wrapper">
+						<div class="img-wrapper slower">
+							<a href="#" target="_blank"
+								rel="noopener"><img
+									src="img/mahabali-charitham-3-20220829145235655057.jpg"
+									alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper faster">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="img/maveli sadhya.webp" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower vertical">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="img/maveli online.jpg"
+									alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower slower-down">
+							<a href=""
+								target="_blank" rel="noopener">
+								<img src="https://i.pinimg.com/originals/0a/a7/48/0aa748de94a8756e58573674ecb79300.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="img/5.webp" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower">
+							<a href="#" target="_blank"
+								rel="noopener">
+								<img src="https://th.bing.com/th/id/OIP.oy98k0YabUx4o7ZW2u_a5AHaEH?w=294&h=180&c=7&r=0&o=5&pid=1.7"
+									alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper faster1">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="https://2.bp.blogspot.com/-mcQyWNsWnxE/V9--2HBcp7I/AAAAAAAAC5s/laShccNPQkww62KBp2B3m9Oh803tBu0QwCLcB/s1600/maveli%2Bmahabali%2Bonam%2Bkerala%2B2016%2Bpraveencrblogspot.com.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower slower2">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/d0fc2f115459345.604f410cea708.jpg"
+									alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="https://th.bing.com/th/id/OIP.KqoRjmfsh8QR-uR0wemhMAAAAA?w=231&h=181&c=7&r=0&o=5&pid=1.7"
+									alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="https://images.news18.com/ibnlive/uploads/2020/08/1598617527_untitled-design-56.jpg?impolicy=website&width=510&height=356"
+									alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower last">
+							<a href="#"
+								target="_blank" rel="noopener">
+								<img src="https://th.bing.com/th/id/OIP.x-AvGVwTWcmUEKsaR-DzRwHaHa?pid=ImgDet&rs=1"
+									alt="">
+							</a>
+						</div>
+					</div>
+
+
+				</div>
+
+
+
+
+
+
+
+			</section>
+
+
+
+		</div>
+		<section>
+
+
+
+
+		</section>
+	</div>
+
+
+
+	<audio id="myAudio" autoplay>
+		<source src="a.mp3" type="audio/mpeg">
+
+	</audio>
+
+	<script>
+
+
+
+
+
+
+
+		// Get the modal
+		var modal = document.getElementById("myModal");
+
+
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal 
+		window.onload = load;
+		function load() {
+			modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.style.display = "none";
+			document.getElementById('myAudio').play();
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+				document.getElementById('myAudio').play();
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+
+</html>
